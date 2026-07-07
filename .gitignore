@@ -1,0 +1,34 @@
+# ???
+*.mp3
+*.zip
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.wav
+*.ogg
+*.mp4
+
+# ??????
+*.db
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# ??
+*_backup_*
+*.lnk
+
+# Node
+node_modules/
+
+# ??
+.DS_Store
+Thumbs.db
+
+# ????
+temp_*.txt
+temp_*.js

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英语默写 — 教师工作台</title>
+<link rel="stylesheet" href="css/theme.css">
+<style>
+  /* 教师仪表盘特有样式 */
+  .teacher-container{max-width:1100px}
+  .dashboard-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .dashboard-header h1{font-size:22px}
+  .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+  .stat-card{background:rgba(26,40,64,0.7);border:1px solid rgba(200,168,78,0.3);border-radius:10px;padding:16px;text-align:center}
+  .stat-card .stat-num{font-size:32px;font-weight:bold;color:#f4d87c}
+  .stat-card .stat-label{font-size:13px;color:#c8b888;margin-top:4px}
+  .tab-nav{display:flex;gap:4px;margin:16px 0;flex-wrap:wrap;border-bottom:2px solid rgba(180,140,60,0.2);padding-bottom:8px}
+  .tab-btn{padding:8px 18px;border:none;background:rgba(26,40,64,0.4);color:#c8b888;border-radius:6px 6px 0 0;cursor:pointer;font-size:14px;font-family:'Microsoft YaHei',sans-serif;transition:all 0.3s}
+  .tab-btn:hover{background:rgba(26,40,64,0.7);color:#d4c090}
+  .tab-btn.active{background:linear-gradient(180deg,#1a2840,#0d1b2d);color:#f4d87c;border-bottom:2px solid #c8a84e}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+  .student-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  .student-table th{background:rgba(26,40,64,0.6);color:#d4c090;padding:10px 8px;text-align:left;border-bottom:2px solid rgba(180,140,60,0.3)}
+  .student-table td{padding:8px;border-bottom:1px solid rgba(180,140,60,0.1);color:#3d2817}
+  .student-table tr:hover td{background:rgba(200,168,78,0.08)}
+  .status-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .status-dot.correct{background:#4a8c5c}
+  .status-dot.wrong{background:#a03a20}
+  .status-dot.untouched{background:#ccc}
+  .item-grid{max-height:600px;overflow-y:auto;margin:12px 0}
+  .item-grid table{width:100%;border-collapse:collapse;font-size:13px}
+  .item-grid th{position:sticky;top:0;background:#1a2840;color:#d4c090;padding:8px;text-align:left;z-index:1}
+  .item-grid td{padding:6px 8px;border-bottom:1px solid rgba(180,140,60,0.08)}
+  .timeline-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+  .timeline-table th{background:rgba(26,40,64,0.6);color:#d4c090;padding:8px;text-align:left}
+  .timeline-table td{padding:6px 8px;border-bottom:1px solid rgba(180,140,60,0.1);color:#3d2817}
+  .filter-row{display:flex;gap:10px;margin:12px 0;flex-wrap:wrap;align-items:center}
+  .filter-row select,.filter-row input{padding:6px 12px;border:1px solid rgba(180,140,60,0.4);border-radius:6px;background:rgba(255,252,245,0.8);color:#2d1f14;font-size:13px;font-family:'Microsoft YaHei',sans-serif}
+  .filter-row .btn-small{padding:6px 14px;font-size:13px}
+  .action-link{color:#a03a20;cursor:pointer;text-decoration:underline;font-size:12px;margin-left:8px}
+  .action-link:hover{color:#c8a84e}
+  .loading-msg{text-align:center;padding:40px;color:#8b7540;font-size:15px}
+  .empty-msg{text-align:center;padding:30px;color:#8b7540;font-size:14px}
+  .add-student-form{background:rgba(200,168,78,0.06);border:1px solid rgba(180,140,60,0.2);border-radius:10px;padding:20px;margin-bottom:16px}
+  .add-student-form h3{color:#1a2840;margin-bottom:12px;font-size:16px}
+  .add-student-form .form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+  .add-student-form input{padding:8px 12px;border:1px solid rgba(180,140,60,0.4);border-radius:6px;background:rgba(255,252,245,0.8);color:#2d1f14;font-size:14px;font-family:'Microsoft YaHei',sans-serif;flex:1;min-width:120px}
+  .batch-hint{font-size:12px;color:#8b7540;margin-top:6px}
+  .page-info{text-align:center;font-size:13px;color:#8b7540;margin:10px 0}
+  @media(max-width:600px){
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .student-table,.item-grid table,.timeline-table{font-size:12px}
+    .student-table th,.student-table td,.item-grid th,.item-grid td,.timeline-table th,.timeline-table td{padding:6px 4px}
+  }
+</style>
+</head>
+<body>
+<div class="container teacher-container">
+  <div class="header">
+    <div class="dashboard-header">
+      <h1>📊 英语默写 — 教师工作台</h1>
+      <div>
+        <span style="color:#c8b888;font-size:13px" id="teacherName"></span>
+        <button class="btn btn-nav" style="padding:4px 12px;font-size:12px;margin-left:8px" onclick="handleTeacherLogout()">🚪 退出</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:20px">
+    <!-- 统计卡片 -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num" id="statStudents">-</div><div class="stat-label">学生总数</div></div>
+      <div class="stat-card"><div class="stat-num" id="statToday">-</div><div class="stat-label">总答题</div></div>
+      <div class="stat-card"><div class="stat-num" id="statAccuracy">-</div><div class="stat-label">整体正确率</div></div>
+      <div class="stat-card"><div class="stat-num" id="statWrong">-</div><div class="stat-label">错题总数</div></div>
+    </div>
+
+    <!-- Tab 导航 -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('students')">👥 学生概览</button>
+      <button class="tab-btn" onclick="switchTab('items')">📋 词条明细</button>
+      <button class="tab-btn" onclick="switchTab('timeline')">🕐 答题时间线</button>
+      <button class="tab-btn" onclick="switchTab('manage')">⚙️ 学生管理</button>
+    </div>
+
+    <!-- Tab 1: 学生概览 -->
+    <div class="tab-content active" id="tab-students">
+      <div class="filter-row">
+        <select id="overviewBankFilter" onchange="loadStudentOverview()">
+          <option value="">全部词库</option>
+        </select>
+        <button class="btn btn-nav btn-small" onclick="loadStudentOverview()">🔄 刷新</button>
+      </div>
+      <div id="overviewContent"><div class="loading-msg">加载中...</div></div>
+    </div>
+
+    <!-- Tab 2: 词条明细 -->
+    <div class="tab-content" id="tab-items">
+      <div class="filter-row">
+        <select id="itemStudentFilter" onchange="loadItemDetail()"><option value="">选择学生...</option></select>
+        <select id="itemBankFilter" onchange="loadItemDetail()"><option value="">选择词库...</option></select>
+        <select id="itemStatusFilter" onchange="renderItemDetail()">
+          <option value="">全部状态</option>
+          <option value="correct">🟢 正确</option>
+          <option value="wrong">🔴 错误</option>
+          <option value="not_attempted">⬜ 未做</option>
+        </select>
+      </div>
+      <div id="itemDetailContent"><div class="empty-msg">请选择学生和词库</div></div>
+    </div>
+
+    <!-- Tab 3: 答题时间线 -->
+    <div class="tab-content" id="tab-timeline">
+      <div class="filter-row">
+        <select id="tlStudentFilter" onchange="loadTimeline()"><option value="">全部学生</option></select>
+        <select id="tlBankFilter" onchange="loadTimeline()"><option value="">全部词库</option></select>
+        <select id="tlDaysFilter" onchange="loadTimeline()">
+          <option value="1">今天</option>
+          <option value="7" selected>最近7天</option>
+          <option value="30">最近30天</option>
+          <option value="0">全部</option>
+        </select>
+        <button class="btn btn-nav btn-small" onclick="loadTimeline()">🔄 刷新</button>
+      </div>
+      <div id="timelineContent"><div class="loading-msg">加载中...</div></div>
+    </div>
+
+    <!-- Tab 4: 学生管理 -->
+    <div class="tab-content" id="tab-manage">
+      <div class="add-student-form">
+        <h3>➕ 添加新学生</h3>
+        <div class="form-row">
+          <input type="text" id="newStudentName" placeholder="姓名（如：张三）">
+          <input type="text" id="newStudentUser" placeholder="账号（如：zhangsan）">
+          <input type="password" id="newStudentPwd" placeholder="密码" value="123456">
+          <button class="btn btn-check" onclick="addStudent()" style="white-space:nowrap">添 加</button>
+        </div>
+        <div class="batch-hint">💡 初始密码统一为 123456，学生登录后可自行修改（暂不支持）</div>
+        <div class="batch-hint" id="addStudentMsg" style="margin-top:4px;color:#a03a20"></div>
+      </div>
+      <div id="studentManageContent"><div class="loading-msg">加载中...</div></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<!-- 教师登录浮层 -->
+<div class="auth-overlay" id="teacherAuthOverlay" style="display:none">
+  <div class="auth-card">
+    <h2 id="authTitle">📊 教师工作台</h2>
+    <div class="auth-sub">请用教师账号登录</div>
+    <div class="auth-error" id="teacherAuthError"></div>
+    <input type="text" id="teacherAuthUsername" placeholder="用户名" autocomplete="username">
+    <input type="password" id="teacherAuthPassword" placeholder="密码" autocomplete="current-password">
+    <button class="auth-btn auth-btn-primary" onclick="handleTeacherLogin()">登 录</button>
+    <div style="text-align:center;margin-top:10px;font-size:12px;color:#8b7540">
+      学生端在 <a href="index.html" style="color:#c8a84e">英语默写本</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/api-config.js"></script>
+<script src="js/wordbanks.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/teacher-dashboard.js"></script>
+</body>
+</html>

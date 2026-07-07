@@ -1,0 +1,137 @@
+/* ==============================================
+   Assassin's Creed Origins — 埃及暗金主题
+   Sand · Gold · Deep Blue · Bronze
+   英语默写本 共享样式表
+   ============================================== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft YaHei','PingFang SC',sans-serif;background:#1a1108;min-height:100vh;display:flex;justify-content:center;padding:20px;background-image:radial-gradient(ellipse at 30% 20%,#2d1a0e 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,#1a2a10 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,#1c1208 0%,#0f0a04 100%)}
+.container{width:100%;max-width:780px;background:linear-gradient(180deg,#f7ecd5 0%,#efe0c0 30%,#e8d8b4 100%);border-radius:16px;box-shadow:0 0 60px rgba(180,140,60,0.15),0 20px 50px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.3);overflow:hidden;border:1px solid rgba(200,160,60,0.25)}
+.header{background:linear-gradient(180deg,#1a2840 0%,#0d1b2d 40%,#0a1520 100%);color:#e8d5a3;padding:28px 30px 24px;text-align:center;position:relative;overflow:hidden;border-bottom:2px solid #b8942e}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,#c8a84e 20%,#f4d87c 50%,#c8a84e 80%,transparent 100%)}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(180deg,transparent 0%,#c8a84e 50%,#8b6914 100%);opacity:0.15}
+.header h1{font-size:26px;margin-bottom:4px;color:#f4d87c;text-shadow:0 2px 10px rgba(200,168,78,0.4);letter-spacing:2px;position:relative;z-index:1}
+.header .subtitle{font-size:13px;opacity:0.75;color:#c8b888;position:relative;z-index:1;margin-bottom:16px}
+
+/* 词库选择器 */
+.bank-select-wrap{display:flex;align-items:center;justify-content:center;gap:8px;position:relative;z-index:1;flex-wrap:wrap}
+.bank-select-wrap label{font-size:14px;font-weight:bold;white-space:nowrap;color:#d4c090}
+.section-filter-wrap{display:flex;align-items:center;gap:8px;margin-left:4px}
+.section-filter-wrap label{font-size:14px;font-weight:bold;white-space:nowrap;color:#d4c090}
+.bank-select{font-size:14px;padding:8px 32px 8px 14px;border-radius:20px;border:1px solid rgba(180,140,70,0.5);background:rgba(20,14,8,0.7);color:#d4c090;font-family:'Microsoft YaHei',sans-serif;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c8a84e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;transition:all 0.3s}
+.bank-select:hover,.bank-select:focus{border-color:#c8a84e;background:rgba(30,18,8,0.85);box-shadow:0 0 12px rgba(200,168,78,0.3)}
+
+.progress-wrap{padding:16px 30px;background:linear-gradient(180deg,rgba(180,140,60,0.08) 0%,transparent 100%);border-bottom:1px solid rgba(180,140,60,0.15)}
+.progress-bar-outer{height:8px;background:rgba(180,140,60,0.15);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.progress-bar-inner{height:100%;background:linear-gradient(90deg,#b8942e,#c8a84e 30%,#f4d87c 60%,#c8a84e);border-radius:4px;transition:width 0.5s ease;width:0%;box-shadow:0 0 10px rgba(200,168,78,0.5)}
+.progress-text{font-size:13px;color:#8b7540;text-align:center}
+.card{padding:30px}
+.card.hide{display:none}
+.section-label{display:inline-block;background:linear-gradient(135deg,#1a2840,#0d1b2d);color:#d4c090;padding:5px 16px;border-radius:4px;font-size:13px;font-weight:bold;margin-bottom:8px;border:1px solid rgba(180,140,60,0.3);letter-spacing:0.5px}
+.tip-box{font-size:13px;color:#8b7a40;background:rgba(200,168,78,0.08);border-left:3px solid #b8942e;padding:8px 12px;border-radius:4px;margin-bottom:14px;line-height:1.6;display:none}
+.prompt-main{font-size:20px;color:#3d2817;line-height:1.6;margin-bottom:14px;text-align:center;font-weight:bold}
+.prompt-cn{font-size:17px;color:#6b5030;text-align:center;margin-bottom:16px}
+
+textarea{width:100%;height:55px;border:2px solid rgba(180,140,60,0.35);border-radius:8px;padding:12px;font-size:17px;font-family:'Georgia','Times New Roman',serif;line-height:1.4;resize:vertical;transition:all 0.3s;outline:none;text-align:center;letter-spacing:0.5px;background:rgba(255,252,245,0.8);color:#2d1f14}
+textarea:focus{border-color:#c8a84e;box-shadow:0 0 0 3px rgba(200,168,78,0.12);background:#fffdf8}
+
+.actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.btn{padding:10px 24px;border-radius:4px;border:none;font-size:15px;font-weight:bold;cursor:pointer;transition:all 0.25s;font-family:'Microsoft YaHei',sans-serif;letter-spacing:0.5px;position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.2);pointer-events:none}
+.btn-check{background:linear-gradient(180deg,#b8942e 0%,#8b6914 100%);color:#fffae8;border-bottom:2px solid #5c4208}
+.btn-check:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(184,148,46,0.45)}
+.btn-hint{background:transparent;color:#a03a20;border:2px solid #a03a20}
+.btn-hint:hover{background:#a03a20;color:#fffae8}
+.btn-nav{background:linear-gradient(180deg,#1a2840 0%,#0d1b2d 100%);color:#d4c090;border-bottom:2px solid #0a1520}
+.btn-nav:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(10,15,30,0.6)}
+.btn-nav:disabled{opacity:0.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-show{background:transparent;color:#1a2840;border:2px solid #1a2840}
+.btn-show:hover{background:#1a2840;color:#d4c090}
+.btn-wrong-book{background:transparent;color:#a03a20;border:2px solid #a03a20;padding:6px 16px;border-radius:4px;font-size:13px;font-weight:bold;cursor:pointer;transition:all 0.3s;font-family:'Microsoft YaHei',sans-serif;white-space:nowrap}
+.btn-wrong-book:hover{background:#a03a20;color:#fffae8;transform:translateY(-1px)}
+.btn-wrong-book.active{background:#a03a20;color:#fffae8;animation:pulse 1.2s ease infinite alternate}
+.btn-wrong-book .badge{display:inline-block;background:#8b2500;color:#ffe0c0;border-radius:10px;padding:2px 8px;font-size:12px;min-width:20px;text-align:center}
+.btn-wrong-book:hover .badge{background:rgba(0,0,0,0.3);color:#ffe0c0}
+.btn-wrong-book.active .badge{background:rgba(0,0,0,0.3);color:#ffe0c0}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(160,58,32,0.4)}100%{box-shadow:0 0 0 10px rgba(160,58,32,0)}}
+
+.mode-bar{display:none;text-align:center;padding:8px 20px;background:rgba(160,58,32,0.12);color:#8b3a20;font-size:13px;font-weight:bold;border-bottom:2px solid #a03a20;letter-spacing:1px}
+.mode-bar.show{display:block}
+
+.feedback{margin-top:14px;display:none;animation:fadeIn 0.4s ease}
+.feedback.show{display:block}
+.fb-summary{font-size:16px;font-weight:bold;padding:10px 14px;border-radius:8px;margin-bottom:10px;text-align:center}
+.fb-summary.great{background:rgba(74,140,92,0.15);color:#2d5a38;border:2px solid #4a8c5c}
+.fb-summary.good{background:rgba(74,140,92,0.1);color:#2d5a38;border:2px solid #5ca070}
+.fb-summary.needs{background:rgba(200,168,78,0.12);color:#6b5030;border:2px solid #b8942e}
+.fb-correct{background:rgba(74,140,92,0.1);border-radius:8px;padding:10px 14px;margin-bottom:6px;font-size:15px;color:#2d5a38}
+.fb-answer{background:linear-gradient(180deg,#fff8ed 0%,#f7ecd5 100%);border:3px solid #c8a84e;border-radius:10px;padding:20px 24px;font-size:32px;color:#a03a20;text-align:center;font-weight:900;letter-spacing:2px;animation:answerPop 0.45s cubic-bezier(0.175,0.885,0.32,1.275);box-shadow:0 0 30px rgba(200,168,78,0.35),0 8px 24px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.6)}
+@keyframes answerPop{0%{transform:scale(0.85);opacity:0}100%{transform:scale(1);opacity:1}}
+
+.error-list{list-style:none;padding:0;margin:0 0 10px 0}
+.error-item{background:#fffdf8;border-radius:8px;padding:8px 12px;margin:4px 0;border-left:4px solid #a03a20;box-shadow:0 1px 3px rgba(0,0,0,0.08);font-size:14px;line-height:1.6}
+.error-item .err-bad{color:#a03a20;text-decoration:line-through;font-weight:bold}
+.error-item .err-good{color:#4a8c5c;font-weight:bold}
+.error-item .err-reason{color:#6b5030;font-size:12px;display:block;margin-top:2px}
+
+.celebrate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:9999;display:none}
+.celebrate-overlay.active{display:block}
+.celebrate-center{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10000;display:none;flex-direction:column;align-items:center;gap:10px;animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+.celebrate-center.active{display:flex;pointer-events:auto}
+.checkmark{width:90px;height:90px}
+.checkmark-circle{stroke-dasharray:166;stroke-dashoffset:166;stroke:#c8a84e;stroke-width:4;fill:none;animation:circleFill 0.6s ease forwards 0.2s}
+.checkmark-check{stroke-dasharray:48;stroke-dashoffset:48;stroke:#c8a84e;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round;animation:checkDraw 0.4s ease forwards 0.7s}
+.celebrate-text{font-size:22px;font-weight:bold;color:#c8a84e;text-align:center;text-shadow:0 2px 12px rgba(200,168,78,0.5)}
+.celebrate-sub{font-size:14px;color:#a09070;text-align:center}
+.celebrate-center .btn-nav{background:linear-gradient(180deg,#b8942e,#8b6914);color:#fffae8;border-bottom:2px solid #5c4208;pointer-events:auto;margin-top:8px}
+@keyframes popIn{0%{transform:translate(-50%,-50%) scale(0)}100%{transform:translate(-50%,-50%) scale(1)}}
+@keyframes circleFill{to{stroke-dashoffset:0}}
+@keyframes checkDraw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.star-burst{position:fixed;font-size:34px;pointer-events:none;z-index:10001;animation:starFloat 1.4s ease-out forwards}
+@keyframes starFloat{0%{opacity:1;transform:translate(0,0) scale(0)}30%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1.3)}100%{opacity:0;transform:translate(var(--dx2),var(--dy2)) scale(0.1)}}
+
+canvas#confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;display:none}
+canvas#confetti.active{display:block}
+
+.all-done{text-align:center;padding:60px 30px;display:none}
+.all-done.show{display:block}
+.all-done .trophy{font-size:90px;animation:trophyBounce 0.8s ease infinite alternate}
+@keyframes trophyBounce{0%{transform:scale(1) rotate(-5deg)}100%{transform:scale(1.15) rotate(5deg)}}
+.all-done h2{font-size:28px;color:#b8942e;margin:16px 0}
+.all-done p{color:#6b5030!important}
+
+@media(max-width:600px){.header h1{font-size:22px}.prompt-main{font-size:18px}textarea{font-size:15px}.celebrate-text{font-size:20px}.checkmark{width:70px;height:70px}.bank-select{font-size:12px;padding:6px 28px 6px 10px}.fb-answer{font-size:24px;padding:14px 16px}}
+
+/* ==============================================
+   登录浮层 (Auth Overlay)
+   ============================================== */
+.auth-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,5,0,0.88);z-index:20000;display:flex;justify-content:center;align-items:center;flex-direction:column}
+.auth-overlay.hide{display:none}
+.auth-card{background:linear-gradient(180deg,#f7ecd5 0%,#efe0c0 30%,#e8d8b4 100%);border-radius:16px;box-shadow:0 0 60px rgba(180,140,60,0.3),0 20px 50px rgba(0,0,0,0.6);padding:36px 30px 28px;width:100%;max-width:400px;text-align:center;border:1px solid rgba(200,160,60,0.35)}
+.auth-card h2{font-size:24px;color:#1a2840;margin-bottom:6px;letter-spacing:2px}
+.auth-card .auth-sub{font-size:13px;color:#8b7540;margin-bottom:20px}
+.auth-card input{width:100%;padding:12px 14px;margin-bottom:12px;border:2px solid rgba(180,140,60,0.35);border-radius:8px;font-size:15px;font-family:'Microsoft YaHei',sans-serif;background:rgba(255,252,245,0.8);color:#2d1f14;text-align:center;outline:none;transition:all 0.3s}
+.auth-card input:focus{border-color:#c8a84e;box-shadow:0 0 0 3px rgba(200,168,78,0.12);background:#fffdf8}
+.auth-card .auth-error{color:#a03a20;font-size:13px;margin-bottom:10px;display:none;background:rgba(160,58,32,0.08);padding:6px 10px;border-radius:4px}
+.auth-card .auth-error.show{display:block}
+.auth-card .auth-btn{width:100%;padding:12px;border-radius:8px;border:none;font-size:16px;font-weight:bold;cursor:pointer;transition:all 0.25s;font-family:'Microsoft YaHei',sans-serif;letter-spacing:1px;margin-bottom:8px}
+.auth-btn-primary{background:linear-gradient(180deg,#b8942e 0%,#8b6914 100%);color:#fffae8;border-bottom:2px solid #5c4208}
+.auth-btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(184,148,46,0.45)}
+.auth-btn-secondary{background:transparent;color:#1a2840;border:2px solid #1a2840}
+.auth-btn-secondary:hover{background:#1a2840;color:#d4c090}
+.auth-toggle{font-size:13px;color:#8b7540;margin-top:14px;cursor:pointer;text-decoration:underline}
+.auth-toggle:hover{color:#b8942e}
+.auth-remember{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:12px;font-size:13px;color:#6b5030}
+.auth-remember input[type=checkbox]{width:auto;margin:0}
+.auth-name-row{display:flex;gap:8px}
+.auth-name-row input{flex:1}
+
+/* 退出按钮 */
+.btn-logout{position:absolute;top:14px;right:20px;z-index:10;background:rgba(0,0,0,0.3);color:#c8b888;border:1px solid rgba(200,168,78,0.3);padding:4px 10px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Microsoft YaHei',sans-serif;transition:all 0.3s;display:none}
+.btn-logout.show{display:block}
+.btn-logout:hover{background:rgba(200,58,32,0.4);color:#ffe0c0;border-color:#a03a20}
+
+/* 用户名称标签（header 中） */
+.user-tag{display:none;color:#d4c090;font-size:12px;margin-left:8px;opacity:0.8}
+.user-tag.show{display:inline}
